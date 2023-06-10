@@ -1,0 +1,46 @@
+{% extends 'public/base.html'%}
+{% block title %}Product Details|E-Shopper{% endblock %}
+{% block content %}
+{% load static %}
+<section>
+	<div class="container">
+		<div class="row" style="margin-right:-207px;margin-left:-2px;">
+			<div class="col-sm-3">
+				<div class="left-sidebar">
+					{% include "public/category_serction.html" %}					
+				</div>
+			</div>
+			<div class="col-sm-9 padding-right">
+				<div class="product-details"><!--product-details-->					
+					<div class="col-sm-7">
+						{% if product_details %}						
+						<div class="product-information"><!--/product-information-->
+							<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+							<h2>{{product_details.name}}</h2>
+							<p>Web ID: 1089772</p>
+							{% for image in product_details.images %}
+							<img src="{% static image.image2 %}" style="width:200px; height:250px" alt="" />
+							{% endfor %}
+							<div>Product Description :<p>{{product_details.description}}</p></div>
+							<span>
+								<span>US ${{product_details.price}}</span>
+								<label>Quantity:</label>
+								<input type="text" value="{{product_details.quantity}}" id="qty" disabled/>
+								<button type="button" class="btn btn-fefault cart" id="cart_btn">
+									<i class="fa fa-shopping-cart"></i>
+									Add to cart
+								</button>
+							</span>
+							<p><b>Availability:</b> In Stock</p>
+							<p><b>Condition:</b> New</p>							
+							<a href=""><img src="images/product-details/share.png" class="share img-responsive"
+									alt="" /></a>
+						</div><!--/product-information-->
+						{% endif %}
+					</div>
+				</div><!--/product-details-->
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

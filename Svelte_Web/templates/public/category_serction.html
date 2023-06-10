@@ -1,0 +1,31 @@
+{% load static %}
+<div class="left-sidebar">
+    <h2>Category</h2>
+    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+        {% if categories %}
+        {%for category in categories %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="/category_filter/{{category.slug}}">
+                        {{category.title}}
+                    </a>
+                </h4>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    No Category Available Now
+                </h4>
+            </div>
+        </div>
+        {% endif %}
+    </div><!--/category-productsr-->
+
+    <div class="shipping text-center"><!--shipping-->
+        <img src="{% static 'images/home/shipping.jpg' %}" alt="" />
+    </div><!--/shipping-->
+</div>

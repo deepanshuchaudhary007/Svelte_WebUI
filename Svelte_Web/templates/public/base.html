@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   {% load static %}
+   {% block head %}{% endblock %}
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <title>{% block title %}{% endblock %}</title>
+   <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+   <link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet">
+   <link href="{% static 'css/prettyPhoto.css'%}" rel="stylesheet">
+   <link href="{% static 'css/price-range.css'%}" rel="stylesheet">
+   <link href="{% static 'css/animate.css'%}" rel="stylesheet">
+   <link href="{% static 'css/main.css' %}" rel="stylesheet">
+   <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+   <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+   <link rel="shortcut icon" href="images/ico/favicon.ico">
+   <link rel="apple-touch-icon-precomposed" sizes="144x144"
+      href="{% static 'images/ico/apple-touch-icon-144-precomposed.png'%}">
+   <link rel="apple-touch-icon-precomposed" sizes="114x114"
+      href="{% static 'images/ico/apple-touch-icon-114-precomposed.png'%}">
+   <link rel="apple-touch-icon-precomposed" sizes="72x72"
+      href="{% static 'images/ico/apple-touch-icon-72-precomposed.png'%}">
+   <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+</head><!--/head-->
+
+<body>
+   {% include "public/header.html" %}
+   {% include "public/slider.html" %}
+   {% block content %}
+   <!--Main Page Body-->
+   {% endblock %}
+   {% include "public/footer.html" %}
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+   <script src="{% static 'js/price-range.js'  %}"></script>
+   <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+   <script src="{% static 'js/main.js' %}"></script>
+   <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>
+<!-- Login Modal End-->
+
+<!--Issue Modal-->
+<div class="modal" tabindex="-1" id="issue_modal" style="display:none;">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="modal_tital"></h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="text-align:right;">X</button>
+       </div>
+       <div class="modal-body">
+         <p id="modal_text"></p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary btn-close" data-bs-dismiss="modal">Close</button>
+         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <!--Change password modal-->
+ <div class="modal fade" id="change_password_modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="change_password_close">X</button>
+      </div>
+      <form method="POST" action="/change_password/">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
+          </div>
+          <div class="mb-3">
+            <label for="password2" class="form-label">Confirm Password</label>
+            <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm your password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+ <!--Forgot password modal-->
+ <div class="modal fade" id="forgot_password_modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Forgot Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="forgot_password_close">X</button>
+      </div>
+      <form method="POST" action="/forgot_password_link/">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" id="password" placeholder="Enter your registered email address">
+          </div>        
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Forgot Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Forgot New Password modal-->
+<div class="modal fade" id="new_password_modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">Change Password</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  id="change_password_close">X</button>
+          </div>
+          <form method="POST" action="{{request.session.link}}">
+              {% csrf_token %}
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password"
+                          placeholder="Enter your password">
+                  </div>
+                  <div class="mb-3">
+                      <label for="password2" class="form-label">Confirm Password</label>
+                      <input type="password" name="password2" class="form-control" id="password2"
+                          placeholder="Confirm your password">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                      data-bs-toggle="modal" data-bs-dismiss="modal">Change Password</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!--User Profile Modal-->
+<!-- Modal -->
+<div class="modal fade" id="profile_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+              <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+              </div>
+          <div class="modal-body">
+              <center>
+              <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+              <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+              <span><strong>Skills: </strong></span>
+                  <span class="label label-warning">HTML5/CSS</span>
+                  <span class="label label-info">Adobe CS 5.5</span>
+                  <span class="label label-info">Microsoft Office</span>
+                  <span class="label label-success">Windows XP, Vista, 7</span>
+              </center>
+              <hr>
+              <center>
+              <p class="text-left"><strong>Bio: </strong><br>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+              <br>
+              </center>
+          </div>
+          <div class="modal-footer">
+              <center>
+              <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+              </center>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+ <!--modal-->
+ <!-- <div class="modal" tabindex="-1" id="change_password_modal" style="display:none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label">Confirm Password</label>
+          <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm your password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Change Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

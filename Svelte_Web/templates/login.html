@@ -1,0 +1,63 @@
+{% extends 'public/base.html'%}
+{% block title %}Login|E-Shopper{% endblock %}
+{% block content %}
+{% load static%}
+<section id="form"><!--form-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-1">
+				<div class="login-form"><!--login form-->
+					<h2>Login to your account</h2>
+					<h2 style="color:red">{% if message %}{{message}}{% else %}{% endif %}</h2>
+					<form action="/login/" method="POST">
+						{% csrf_token %}						
+						<input type="email" placeholder="Enter Your Registered Email Address" name="login_email" id="login_email" />
+						<input type="password" placeholder="Enter Your Password" id="login_password" name="login_password"/>
+						<!-- <span>
+							<input type="checkbox" class="checkbox">
+							Keep me signed in
+						</span> -->
+						<button type="submit" class="btn btn-default">Login</button>
+					</form>
+				</div><!--/login form-->
+			</div>
+			<div class="col-sm-1">
+				<h2 class="or">OR</h2>
+			</div>
+			<div class="col-sm-4">
+				<div class="signup-form"><!--sign up form-->
+					<h2>New User Signup!</h2>
+					<!--'name', 
+                'email', 'address', 'country', 'state', 'city', 
+                'pin_code', 'mobile', 'password',-->
+					<form action="/register_user/" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input type="text" placeholder="Enter Your Full Name" name="name" id="name" required/>
+						<input type="email" placeholder="Enter Your Email Address" name="email" id="email" required/>
+						<input type="mobile" placeholder="Enter Your Mobile Number" name="mobile" id="mobile" required/>						
+						<input type="text" placeholder="Enter Your Address" name="address" id="address" required/>
+						<select style="margin-top:10px" id="country_dropdown" name="country_dropdown">
+							<option>--Select Your Country--</option>
+							{% if country %}
+							{% for item in country %}
+							<option value="{{item.id}}">{{item.country_name}}</option>
+							{%endfor%}
+							{% endif %}
+						</select>
+						<select style="margin-top:10px" id="state_dropdown" name="state_dropdown">
+							<option>--Select Your State--</option>
+						</select>
+						<select style="margin-top:10px" id="city_dropdown" name="city_dropdown">
+							<option>--Select Your City--</option>
+						</select>
+						<input type="number" placeholder="Enter Your Pin Code" name="pin_code" id="pin_code" style="margin-top:10px;"/>
+						<input type="password" placeholder="Enter Your Password" name="password" id="password" style="margin-top:10px;" required/>
+						<input type="password" placeholder="Please Confirm Your Password" name="password2" id="password2" style="margin-top:10px;" required/>						
+						<button type="submit" class="btn btn-default" style="margin-top:10px">Signup</button>
+					</form>
+				</div><!--/sign up form-->
+			</div>
+		</div>
+	</div>
+</section><!--/form-->
+{% endblock %}
